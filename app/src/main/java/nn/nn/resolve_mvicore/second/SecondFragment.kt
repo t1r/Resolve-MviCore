@@ -39,6 +39,7 @@ class SecondFragment
 
     override fun onDestroy() {
         super.onDestroy()
+        bindings.dispose()
         Timber.d("SecondFragment: onDestroy $this")
     }
 

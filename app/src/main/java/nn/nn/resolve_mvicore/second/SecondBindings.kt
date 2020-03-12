@@ -14,4 +14,8 @@ class SecondBindings constructor(
         binder.bind(feature to view using SecondViewModelTransformer())
         binder.bind(feature.news to newsListener)
     }
+
+    fun dispose() {
+        feature.dispose()
+    }
 }
