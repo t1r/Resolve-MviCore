@@ -12,4 +12,8 @@ object Screens {
     object Second : SupportAppScreen() {
         override fun getFragment() = SecondFragment()
     }
+
+//    object Third : SupportAppScreen() {
+//        override fun getFragment() = ThirdFragment()
+//    }
 }
