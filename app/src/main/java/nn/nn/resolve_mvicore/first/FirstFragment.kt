@@ -8,6 +8,7 @@ import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fragment_first.*
 import nn.nn.resolve_mvicore.R
 import nn.nn.resolve_mvicore.common.BaseObservableDiFragment
+import nn.nn.resolve_mvicore.ext.visible
 import timber.log.Timber
 import toothpick.config.Module
 import toothpick.ktp.binding.bind
@@ -31,7 +32,8 @@ class FirstFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        next.setOnClickListener { onNext(FirstUiEvent.NextClick) }
+        initUi()
+        onNext(FirstUiEvent.Init)
     }
 
     override fun accept(viewModel: FirstViewModel) {
@@ -48,9 +50,20 @@ class FirstFragment
         Timber.d("FirstFragment: onDestroyView $this")
     }
 
-    private val watcher = modelWatcher<FirstViewModel> {
-        watch(FirstViewModel::responseModel) { model ->
+    private fun initUi() {
+        next.setOnClickListener { onNext(FirstUiEvent.NextClick) }
+    }
 
+    private val watcher = modelWatcher<FirstViewModel> {
+        watch(FirstViewModel::isLoading) { isLoading ->
+            progressBar?.visible(isLoading)
+        }
+
+        watch(FirstViewModel::responseModel) { model ->
+            model?.let {
+                textView1.text = model.someText1
+                textView2.text = model.someText2
+            }
         }
     }
 

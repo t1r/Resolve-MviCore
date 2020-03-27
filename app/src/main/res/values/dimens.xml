@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <dimen name="padding_zero">0dp</dimen>
+    <dimen name="padding_nano">2dp</dimen>
+    <dimen name="padding_tiny">4dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_reduced">12dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_extended">24dp</dimen>
+    <dimen name="padding_large">32dp</dimen>
+
+</resources>

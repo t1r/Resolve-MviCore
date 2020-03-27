@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_gravity="bottom"
+        android:visibility="visible"
+        android:indeterminate="true"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -12,6 +22,29 @@
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textStyle="bold" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_large"
+        android:layout_marginEnd="@dimen/padding_large"
+        android:padding="16dp"
+        tools:text="TEXT 1" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_large"
+        android:layout_marginEnd="@dimen/padding_large"
+        android:padding="16dp"
+        tools:text="TEXT 2" />
 
     <Space
         android:layout_width="wrap_content"

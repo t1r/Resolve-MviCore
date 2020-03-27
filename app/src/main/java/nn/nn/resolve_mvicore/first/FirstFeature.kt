@@ -5,7 +5,10 @@ import com.badoo.mvicore.element.NewsPublisher
 import com.badoo.mvicore.element.Reducer
 import com.badoo.mvicore.feature.BaseFeature
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import nn.nn.resolve_mvicore.first.model.FirstResponseModel
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class FirstFeature @Inject constructor() : BaseFeature<
@@ -34,11 +37,15 @@ class FirstFeature @Inject constructor() : BaseFeature<
     sealed class Wish {
         object Back : Wish()
         object GoNext : Wish()
+        object Init : Wish()
     }
 
     sealed class Effect {
         object Back : Effect()
         object GoNext : Effect()
+        object InitInProgress : Effect()
+        data class InitComplete(val response: FirstResponseModel) : Effect()
+        data class InitFailure(val error: Throwable) : Effect()
     }
 
     sealed class News {
@@ -52,7 +59,29 @@ class FirstFeature @Inject constructor() : BaseFeature<
             is Action.Execute -> when (action.wish) {
                 is Wish.Back -> Observable.just(Effect.Back)
                 is Wish.GoNext -> Observable.just(Effect.GoNext)
+                is Wish.Init -> resolveInit(state)
             }
+        }
+
+        private fun resolveInit(
+            state: State
+        ): Observable<out Effect> {
+            if (state.isLoading) return Observable.empty()
+            return Observable.timer(200, TimeUnit.MILLISECONDS)
+                .map {
+                    val timeStamp = System.currentTimeMillis() / 1000
+                    return@map Effect.InitComplete(
+                        FirstResponseModel(
+                            "Text1 $timeStamp",
+                            "Text2 $timeStamp"
+                        )
+                    )
+                }
+                .cast(Effect::class.java)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .startWith(Observable.just(Effect.InitInProgress))
+                .onErrorReturn { Effect.InitFailure(it) }
         }
     }
 
@@ -60,6 +89,9 @@ class FirstFeature @Inject constructor() : BaseFeature<
         override fun invoke(state: State, effect: Effect): State = when (effect) {
             is Effect.Back -> state
             is Effect.GoNext -> state
+            is Effect.InitInProgress -> state.copy(isLoading = true)
+            is Effect.InitComplete -> state.copy(isLoading = false, responseModel = effect.response)
+            is Effect.InitFailure -> state.copy(isLoading = false)
         }
     }
 
