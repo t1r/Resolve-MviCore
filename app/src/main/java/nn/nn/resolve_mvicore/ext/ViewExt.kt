@@ -23,3 +23,7 @@ fun View.show() {
 fun View.visible(visible: Boolean) {
     this.visibility = if (visible) View.VISIBLE else View.GONE
 }
+
+fun View.hideable(visible: Boolean) {
+    this.visibility = if (visible) View.VISIBLE else View.INVISIBLE
+}

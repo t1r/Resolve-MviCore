@@ -7,6 +7,7 @@ import com.badoo.mvicore.feature.BaseFeature
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import nn.nn.resolve_mvicore.ext.toddMMyyyyHHmmss
 import nn.nn.resolve_mvicore.first.model.FirstResponseModel
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -66,10 +67,11 @@ class FirstFeature @Inject constructor() : BaseFeature<
         private fun resolveInit(
             state: State
         ): Observable<out Effect> {
+            if (state.responseModel != null) return Observable.empty()
             if (state.isLoading) return Observable.empty()
             return Observable.timer(200, TimeUnit.MILLISECONDS)
                 .map {
-                    val timeStamp = System.currentTimeMillis() / 1000
+                    val timeStamp = System.currentTimeMillis().toddMMyyyyHHmmss()
                     return@map Effect.InitComplete(
                         FirstResponseModel(
                             "Text1 $timeStamp",

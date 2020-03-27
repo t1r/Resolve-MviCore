@@ -57,7 +57,7 @@ class SecondFeature : BaseFeature<
 
         private fun resolveCountdown(state: State): Observable<out Effect> {
             val seconds = state.resendRemainingSeconds
-            Timber.d("resolveCountdown: $seconds $this ")
+            //Timber.d("resolveCountdown: $seconds $this ")
             return when {
                 seconds > 0L -> {
                     Observable.just(
