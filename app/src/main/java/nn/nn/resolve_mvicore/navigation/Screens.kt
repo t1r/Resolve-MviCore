@@ -1,10 +1,17 @@
 package nn.nn.resolve_mvicore.navigation
 
 import nn.nn.resolve_mvicore.first.FirstFragment
+import nn.nn.resolve_mvicore.firstflow.FirstFlowFragment
 import nn.nn.resolve_mvicore.second.SecondFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 object Screens {
+
+    /* First Flow */
+    object FirstFlow : SupportAppScreen() {
+        override fun getFragment() = FirstFlowFragment()
+    }
+
     object First : SupportAppScreen() {
         override fun getFragment() = FirstFragment()
     }
