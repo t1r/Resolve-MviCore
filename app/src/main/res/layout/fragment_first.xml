@@ -8,8 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="FIRST FRAGMENT"
+        android:text="@string/first_fragment"
         android:textAlignment="center"
+        android:textAllCaps="true"
         android:textStyle="bold" />
 
     <Space
@@ -21,11 +22,12 @@
         android:id="@+id/next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textColor="@android:color/white"
         android:background="@android:color/holo_green_light"
-        android:text="NEXT"
+        android:padding="16dp"
+        android:text="@string/action_next"
         android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
         android:textStyle="bold" />
 
 </LinearLayout>

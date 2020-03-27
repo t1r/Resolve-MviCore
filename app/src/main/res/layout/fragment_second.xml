@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -8,15 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="SECOND FRAGMENT"
+        android:text="@string/second_fragment"
         android:textAlignment="center"
+        android:textAllCaps="true"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="Timer:"
+        android:text="@string/timer_dots"
         android:textAlignment="center"
         android:textStyle="bold" />
 
@@ -25,9 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="0"
         android:textAlignment="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="0" />
 
     <Space
         android:layout_width="wrap_content"
@@ -38,11 +40,12 @@
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textColor="@android:color/white"
         android:background="@android:color/holo_blue_dark"
-        android:text="BACK"
+        android:padding="16dp"
+        android:text="@string/action_back"
         android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
         android:textStyle="bold" />
 
 </LinearLayout>
