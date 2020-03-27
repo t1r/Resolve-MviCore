@@ -3,6 +3,7 @@
 
     <string name="action_next">Next</string>
     <string name="action_back">Back</string>
+    <string name="action_load">Load</string>
 
 
     <string name="first_fragment">First fragment</string>

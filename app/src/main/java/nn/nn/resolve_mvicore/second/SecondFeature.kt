@@ -25,6 +25,10 @@ class SecondFeature : BaseFeature<
     bootstrapper = BootstrapperImpl()
 ) {
 
+    init {
+        Timber.d(" Init Second Feature")
+    }
+
     data class State(
         val resendRemainingSeconds: Long = 100L
     )

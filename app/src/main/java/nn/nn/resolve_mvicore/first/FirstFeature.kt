@@ -9,6 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import nn.nn.resolve_mvicore.ext.toddMMyyyyHHmmss
 import nn.nn.resolve_mvicore.first.model.FirstResponseModel
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -25,6 +26,10 @@ class FirstFeature @Inject constructor() : BaseFeature<
     reducer = ReducerImpl(),
     newsPublisher = NewsPublisherImpl()
 ) {
+
+    init {
+        Timber.d(" Init First Feature")
+    }
 
     data class State(
         val isLoading: Boolean = false,
@@ -56,11 +61,14 @@ class FirstFeature @Inject constructor() : BaseFeature<
 
     class ActorImpl
         : Actor<State, Action, Effect> {
-        override fun invoke(state: State, action: Action): Observable<out Effect> = when (action) {
-            is Action.Execute -> when (action.wish) {
-                is Wish.Back -> Observable.just(Effect.Back)
-                is Wish.GoNext -> Observable.just(Effect.GoNext)
-                is Wish.Init -> resolveInit(state)
+        override fun invoke(state: State, action: Action): Observable<out Effect> {
+            Timber.d("Actor: $action")
+            return when (action) {
+                is Action.Execute -> when (action.wish) {
+                    is Wish.Back -> Observable.just(Effect.Back)
+                    is Wish.GoNext -> Observable.just(Effect.GoNext)
+                    is Wish.Init -> resolveInit(state)
+                }
             }
         }
 
