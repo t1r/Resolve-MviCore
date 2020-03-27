@@ -9,8 +9,9 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class SecondFeature : BaseFeature<
+class SecondFeature @Inject constructor() : BaseFeature<
         SecondFeature.Wish,
         SecondFeature.Action,
         SecondFeature.Effect,

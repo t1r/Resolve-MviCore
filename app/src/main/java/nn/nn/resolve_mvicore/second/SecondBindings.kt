@@ -2,8 +2,9 @@ package nn.nn.resolve_mvicore.second
 
 import com.badoo.mvicore.android.AndroidBindings
 import com.badoo.mvicore.binder.using
+import javax.inject.Inject
 
-class SecondBindings constructor(
+class SecondBindings @Inject constructor(
     lifecycleOwner: SecondFragment,
     private val feature: SecondFeature,
     private val newsListener: SecondNewsListener

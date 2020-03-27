@@ -7,21 +7,22 @@ import com.badoo.mvicore.modelWatcher
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fragment_second.*
 import nn.nn.resolve_mvicore.R
-import nn.nn.resolve_mvicore.common.BaseObservableDiLessFragment
+import nn.nn.resolve_mvicore.common.BaseObservableDiFragment
 import timber.log.Timber
+import toothpick.config.Module
+import toothpick.ktp.binding.bind
+import toothpick.ktp.binding.module
+import toothpick.ktp.delegate.inject
 
 class SecondFragment
-    : BaseObservableDiLessFragment<SecondUiEvent>(),
+    : BaseObservableDiFragment<SecondUiEvent>(),
     Consumer<SecondViewModel> {
 
     override val layoutRes: Int = R.layout.fragment_second
-    private val bindings: SecondBindings by lazy {
-        SecondBindings(
-            lifecycleOwner = this,
-            feature = SecondFeature(),
-            newsListener = SecondNewsListener(this)
-        )
-    }
+    override val modules: Array<Module> = arrayOf(module {
+        bind<SecondFragment>().toInstance { this@SecondFragment }
+    })
+    private val bindings: SecondBindings by inject()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
