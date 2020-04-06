@@ -33,7 +33,6 @@ class FirstFragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
-//        onNext(FirstUiEvent.Init)
     }
 
     override fun accept(viewModel: FirstViewModel) {
@@ -54,6 +53,10 @@ class FirstFragment
     private fun initUi() {
         next.setOnClickListener { onNext(FirstUiEvent.NextClick) }
         load.setOnClickListener { onNext(FirstUiEvent.Init) }
+        mainNext.setOnClickListener {
+//            (activity as? MainActivity)?.goToNext()
+            onNext(FirstUiEvent.MainNextClick)
+        }
     }
 
     private val watcher = modelWatcher<FirstViewModel> {

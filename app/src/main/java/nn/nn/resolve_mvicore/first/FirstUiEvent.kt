@@ -4,6 +4,7 @@ sealed class FirstUiEvent {
     object BackClick : FirstUiEvent()
     object NextClick : FirstUiEvent()
     object Init : FirstUiEvent()
+    object MainNextClick : FirstUiEvent()
 }
 
 class FirstUiEventToWish : (FirstUiEvent) -> FirstFeature.Wish? {
@@ -11,5 +12,6 @@ class FirstUiEventToWish : (FirstUiEvent) -> FirstFeature.Wish? {
         is FirstUiEvent.BackClick -> FirstFeature.Wish.Back
         is FirstUiEvent.NextClick -> FirstFeature.Wish.GoNext
         is FirstUiEvent.Init -> FirstFeature.Wish.Init
+        is FirstUiEvent.MainNextClick -> FirstFeature.Wish.GoNextByCommon
     }
 }

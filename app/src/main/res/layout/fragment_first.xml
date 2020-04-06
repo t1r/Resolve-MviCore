@@ -76,4 +76,16 @@
         android:textColor="@android:color/white"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/mainNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_dark"
+        android:padding="16dp"
+        android:text="@string/main_next"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
 </LinearLayout>

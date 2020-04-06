@@ -44,11 +44,13 @@ class FirstFeature @Inject constructor() : BaseFeature<
         object Back : Wish()
         object GoNext : Wish()
         object Init : Wish()
+        object GoNextByCommon : Wish()
     }
 
     sealed class Effect {
         object Back : Effect()
         object GoNext : Effect()
+        object GoNextByCommon : Effect()
         object InitInProgress : Effect()
         data class InitComplete(val response: FirstResponseModel) : Effect()
         data class InitFailure(val error: Throwable) : Effect()
@@ -57,6 +59,7 @@ class FirstFeature @Inject constructor() : BaseFeature<
     sealed class News {
         object Back : News()
         object GoNext : News()
+        object GoNextByCommon : News()
     }
 
     class ActorImpl
@@ -68,6 +71,7 @@ class FirstFeature @Inject constructor() : BaseFeature<
                     is Wish.Back -> Observable.just(Effect.Back)
                     is Wish.GoNext -> Observable.just(Effect.GoNext)
                     is Wish.Init -> resolveInit(state)
+                    is Wish.GoNextByCommon -> Observable.just(Effect.GoNextByCommon)
                 }
             }
         }
@@ -99,6 +103,7 @@ class FirstFeature @Inject constructor() : BaseFeature<
         override fun invoke(state: State, effect: Effect): State = when (effect) {
             is Effect.Back -> state
             is Effect.GoNext -> state
+            is Effect.GoNextByCommon -> state
             is Effect.InitInProgress -> state.copy(isLoading = true)
             is Effect.InitComplete -> state.copy(isLoading = false, responseModel = effect.response)
             is Effect.InitFailure -> state.copy(isLoading = false)
@@ -110,6 +115,7 @@ class FirstFeature @Inject constructor() : BaseFeature<
         override fun invoke(action: Action, effect: Effect, state: State): News? = when (effect) {
             is Effect.Back -> News.Back
             is Effect.GoNext -> News.GoNext
+            is Effect.GoNextByCommon -> News.GoNextByCommon
             else -> null
         }
     }
